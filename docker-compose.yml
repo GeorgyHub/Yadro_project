@@ -1,0 +1,17 @@
+version: '3.8'
+service:
+  project:
+    build: .
+    command: python manage.py runserver localhost:8000
+    ports:
+      - 8000:8000
+
+    depends_on:
+      - database
+
+    database:
+      image: postgres:14.17-alpine
+      environment:
+        - POSTGRES_DB=dbname
+        - POSTGRES_USER=dbuser
+        - POSTGRES_PASSWORD=pass
