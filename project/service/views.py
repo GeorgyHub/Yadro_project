@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
+from .models import Post, Category, Tags
 from rest_framework import routers, serializers, viewsets
 
 # Create your views here.
@@ -15,7 +17,16 @@ def about(request):
     return render(request, 'service/about.html', context=context)
 
 def blog(request):
+    post = Post.objects.all()
+    categories =  Category.objects.all()
+    tags = Tags.objects.all()
+    paginator = Paginator(post, 10)
+
     context = {
+        'post': post,
+        'categories': categories,
+        'tags': tags,
+        'paginator': paginator,
         'title': 'Блог'
     }
     return render(request, 'service/blog.html', context=context)
