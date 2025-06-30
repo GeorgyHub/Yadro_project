@@ -7,9 +7,11 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title', 'category')
     list_filter = ('id', 'title', 'category')
     search_fields = ('title', 'category', 'created_at')
+    prepopulated_fields = {"slug": ("title",)}
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'category')
+    prepopulated_fields = {"slug": ("category",)}
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'comment')

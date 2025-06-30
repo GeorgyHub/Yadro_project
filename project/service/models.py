@@ -10,6 +10,7 @@ class Post(models.Model):
 
     user = models.ForeignKey(User, verbose_name = 'Пользователь', on_delete=models.CASCADE, null=True, default=None, blank=True)
     title = models.CharField(verbose_name='Заголовок', max_length=50)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     image = models.ImageField(verbose_name='Изображение', blank=True, null=False, upload_to='media/posts')
     description = models.TextField(verbose_name='Запись')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')
@@ -29,6 +30,7 @@ class Category(models.Model):
         ordering = ['category']
 
     category = models.CharField(max_length=50, db_index=True, blank=True, verbose_name='Категория')
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self):
         return self.category
