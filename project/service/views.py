@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Post, Category, Tags
 from rest_framework import routers, serializers, viewsets
@@ -30,6 +30,15 @@ def blog(request):
         'title': 'Блог'
     }
     return render(request, 'service/blog.html', context=context)
+
+def post(request, post_slug):
+    post = get_object_or_404(Post, slug=post_slug)
+
+    context = {
+        'post': post
+    }
+
+    return render(request, 'service/post.html', context=context)
 
 def performer(request):
     context = {
