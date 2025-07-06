@@ -27,7 +27,7 @@
                                     <a class="d-inline-block" href="{{ post.get_absolute_url }}">
                                         <h2>{{ post.title }}</h2>
                                     </a>
-                                    <p> {{ post.description }}</p>
+                                    <p> {{ post.description|truncatechars:250|linebreaks }}</p>
                                     <ul class="blog-info-link">
                                         <li><a href="#"><i class="fa fa-user"></i> {{ request.user }}</a></li>
                                         <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>

@@ -3,7 +3,7 @@ from .models import Post, Comment, Category, Tags
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'category', 'created_at')
+    list_display = ('id', 'title', 'category', 'created_at', 'is_published')
     list_display_links = ('id', 'title', 'category')
     list_filter = ('id', 'title', 'category')
     search_fields = ('title', 'category', 'created_at')
@@ -15,6 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'comment')
+    list_display_links = ('id', 'comment')
 
 class TagsAdmin(admin.ModelAdmin):
     list_display = ('id', 'tag')

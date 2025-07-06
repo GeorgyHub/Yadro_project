@@ -17,8 +17,7 @@ class Post(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
-    comment = models.ForeignKey('Comment', on_delete=models.PROTECT, null=True, blank=True, default = None, verbose_name='Комментарий')
-    tag = models.ForeignKey('Tags', on_delete=models.PROTECT, null=True, blank=True, verbose_name='Тэг')
+    tag = models.ManyToManyField('Tags', null=True, blank=True, verbose_name='Тэг')
     is_published = models.BooleanField(default=True, verbose_name='Публикация')
 
     def __str__(self):
@@ -35,6 +34,8 @@ class Category(models.Model):
 
     category = models.CharField(max_length=50, db_index=True, blank=True, verbose_name='Категория')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
     def __str__(self):
         return self.category
@@ -56,5 +57,9 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
 
     user = models.ForeignKey(User, verbose_name = 'Пользователь', on_delete=models.CASCADE, null=True, default=None, blank=True)
+    post = models.ForeignKey('Post', on_delete=models.PROTECT, null=True, blank=True, default=None,  verbose_name='Запись')
     comment = models.TextField(verbose_name='Запись')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+
+    def __str__(self):
+        return f"Комментарий от {self.user} к посту {self.post}"
