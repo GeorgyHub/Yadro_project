@@ -59,6 +59,16 @@ REST_FRAMEWORK = {
 
 ROOT_URLCONF = 'project.urls'
 
+# SMTP
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'goergy.polkanov@gmail.com'
+EMAIL_HOST_PASSWORD = '2453535777Af'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Templates
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
