@@ -24,14 +24,14 @@ def blog_list(request):
     categories =  Category.objects.all()
     tags = Tags.objects.all()
     paginator = Paginator(post, 10)
-    form = PostForm()
+    #form = PostForm()
 
     context = {
         'post': post,
         'categories': categories,
         'tags': tags,
         'paginator': paginator,
-        'form': form,
+        #'form': form,
         'title': 'Блог'
     }
     return render(request, 'service/blog.html', context=context)
